@@ -1,0 +1,35 @@
+{% extends "clients/base.html" %}
+{% load static %}
+
+{% block clients_content %}
+  <div class="photos-list">
+    {% for client in clients %}
+      {% if client.photo %}
+        <div class="card common-info photo-item">
+
+          <img class="img-thumbnail rounded-circle client-photo"
+               src="{{ client.photo.url }}">
+
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ client.get_full_name }}</h5>
+            <div class="card-text">
+              <span id="client-{{ client.id }}-rating">{{ client.rating }}</span>
+              {% if client.rating < client.MAX_RATING %}
+                <img src="{% static "img/ajax_loader2.gif" %}"
+                     id="loader-{{ client.id }}" class="loader">
+                <button class="btn btn-secondary"
+                        onclick="vote(this, {{ client.id }})">+
+                </button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+{% endblock %}
+
+{% block extra_body %}
+  <script src="{% static "js/voting.js" %}"></script>
+{% endblock %}

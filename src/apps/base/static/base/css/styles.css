@@ -1,0 +1,5 @@
+.logout-panel{
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px;
+}

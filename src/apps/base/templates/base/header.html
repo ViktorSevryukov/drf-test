@@ -1,0 +1,8 @@
+{% if request.user.is_authenticated %}
+    <div class="logout-panel">
+        <a class="btn btn-secondary" href="{% url 'auth:logout' %}">Logout</a>
+    </div>
+{% endif %}
+<div class="my-3 text-center">
+    <h1>DRF TEST</h1>
+</div>

@@ -1,0 +1,15 @@
+{% extends "auth_core/base.html" %}
+
+{% block content %}
+
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <h3 class="panel-title">You loged out, if you want continue to
+                work, please Log In again:</h3>
+        </div>
+        <div class="panel-body">
+            <a class="btn btn-primary" href={% url "auth:login" %}>Login</a>
+        </div>
+    </div>
+{% endblock %}
+

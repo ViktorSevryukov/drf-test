@@ -1,0 +1,30 @@
+{% extends "clients/base.html" %}
+{% load static %}
+
+{% block clients_content %}
+        <div class="row">
+        <!-- PHOTO PANEL -->
+            <div class="card col-xs-12 col-sm-12 col-md-4 col-lg-3 common-info">
+                {% if object.photo %}
+                <img class="img-thumbnail rounded-circle client-photo"
+                     src="{{ object.photo.url }}">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ object.get_full_name }}</h5>
+                </div>
+            </div>
+        <!-- /PHOTO PANEL-->
+
+        <!-- DETAILED INFO -->
+            <div class="card col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                <div class="card-body">
+                    <h5 class="card-title">Detailed Information</h5>
+                    <div class="card-text">
+                    <p>Age: {{ object.age }}</p>
+                    <p>Birth date: {{ object.birth_date|date:'d.m.Y' }}</p>
+                    </div>
+                </div>
+            </div>
+        <!-- /DETAILED INFO -->
+        </div>
+{% endblock %}

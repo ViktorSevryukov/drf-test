@@ -1,0 +1,33 @@
+{% extends "clients/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <!-- DatePicker -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+{% endblock %}
+
+{% block clients_content %}
+
+    <form action="" method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input class="mt-2 btn btn-primary" type="submit"
+               value="Create client"/>
+    </form>
+
+{% endblock %}
+
+{% block extra_body %}
+    <!-- DatePicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="{% static 'js/create_client.js' %}"></script>
+{% endblock %}

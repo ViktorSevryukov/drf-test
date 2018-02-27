@@ -1,0 +1,54 @@
+:root {
+    --photo-size: 200px;
+}
+
+.details-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.common-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.client-photo {
+    width: var(--photo-size);
+    height: var(--photo-size);
+    object-fit: cover;
+}
+
+.photos-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-item {
+    margin: 5px 35px;
+    max-width: 200px;
+}
+
+.loader {
+    height: 30px;
+    max-width: 30px;
+    display: none;
+}
+
+.export-controls {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-button {
+    margin-bottom: -0.5em;
+}
+
+.form-field-wrapper{
+    margin: 0 1em 1em 1em;
+}
+
+.show-all-button{
+    margin: 1.5em 1em auto;
+}

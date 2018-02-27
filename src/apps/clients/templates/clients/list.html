@@ -1,0 +1,117 @@
+{% extends "clients/base.html" %}
+{% load static %}
+
+{% block clients_content %}
+  <div class="control-panel">
+
+    <!-- FILTER FORM (ORDER, SEARCH) -->
+      <form method="get" class="form-inline" action="">
+      {% for field in filter_form %}
+        <div class="form-field-wrapper">
+          {{ field.errors }}
+          {{ field.label_tag }} {{ field }}
+          {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="search-button btn btn-primary">Search
+      </button>
+
+      <a class="show-all-button btn btn-secondary" href="{% url 'clients:list' %}">Show all</a>
+    </form>
+    <!-- / FILTER FORM (ORDER, SEARCH) -->
+
+    {% if clients %}
+      <div class="export-controls">
+        <img src="{% static "img/ajax_loader2.gif" %}"
+             id="export-loader" class="loader">
+        <button id='export-button' class="ml-2 mb-2 btn btn-primary"
+                onclick="exportXLS()">Export XLS
+        </button>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- CLIENTS TABLE -->
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Birth date</th>
+      <th scope="col">Age</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {#        {% for client in clients %}#}
+    {% for client in clients %}
+      <tr>
+        <td>{{ client.first_name }}</td>
+        <td>{{ client.last_name }}</td>
+        <td>{{ client.birth_date|date:"d.m.Y" }}</td>
+        <td>{{ client.age }}</td>
+        <td>
+          <a href="{% url 'clients:detail' client.id %}">View
+            details</a>
+        </td>
+        <td>
+          <a href="{% url 'clients:delete' client.id %}"> Delete </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+
+  </table>
+  <!-- /CLIENTS TABLE -->
+
+  <!-- PAGINATION -->
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        {% if page_obj.has_previous %}
+          <a class="page-link"
+             href="?page={{ page_obj.previous_page_number }}">
+        {% else %}
+          <a class="page-link" href="#">
+        {% endif %}
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active"><a class="page-link"
+                                          href="#">{{ i }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link"
+                                   href="?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      <li class="page-item">
+        {% if page_obj.has_next %}
+          <a class="page-link"
+             href="?page={{ page_obj.next_page_number }}">
+        {% else %}
+          <a class="page-link" href="#">
+        {% endif %}
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+  <!-- /PAGINATION -->
+
+{% endblock %}
+
+{% block extra_body %}
+  <script src="{% static 'js/list.js' %}"></script>
+{% endblock %}

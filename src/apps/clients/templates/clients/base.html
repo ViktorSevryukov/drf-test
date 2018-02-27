@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static "css/clients.css" %}">
+{% endblock %}
+{% block content %}
+    <div class="row">
+
+        <!-- MENU -->
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+            {% block menu %}
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'clients:list' %}">Clients
+                            list</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'clients:create' %}"
+                           class="nav-link">Create client</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'clients:voting' %}">Voting
+                            page</a>
+                    </li>
+                </ul>
+            {% endblock %}
+        </div>
+        <!-- /MENU -->
+
+        <!-- MAIN CONTENT -->
+        <div id="content" class="pr-5 col-xs-12 col-sm-8 col-md-8 col-lg-10">
+            {% block clients_content %}
+            {% endblock %}
+        </div>
+        <!-- /MAIN CONTENT -->
+
+    </div>
+{% endblock %}
+
+
+
+

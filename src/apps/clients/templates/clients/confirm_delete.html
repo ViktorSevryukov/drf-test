@@ -1,0 +1,11 @@
+{% extends "clients/base.html" %}
+
+{% block clients_content %}
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object.get_full_name }}"?</p>
+        <input class="btn btn-danger" type="submit" value="Delete"/>
+        <a href="{% url 'clients:list' %}" class="btn btn-secondary">
+            Back to clients list
+        </a>
+    </form>
+{% endblock %}
